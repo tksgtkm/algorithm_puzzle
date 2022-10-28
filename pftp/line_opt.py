@@ -8,10 +8,13 @@ def pleaseConformOpt(caps):
     backward = 0
     intervals = []
 
+    # この処理によって、最後の区間の識別ができるようになる。
     caps = caps + ['END']
 
     for i in range(1, len(caps)):
         if caps[start] != caps[i]:
+            # 最適化していないコードでは下記の処理を二箇所に記述したが、
+            # このコードでは一箇所の記述で済んでいる。
             intervals.append((start, i - 1, caps[start]))
 
             if caps[start] == 'F':
@@ -28,6 +31,7 @@ def pleaseConformOpt(caps):
         if t[2] == 'flip':
             print('People in positions', t[0], 'through', t[1], 'flip your caps')
 
+# 1パスアルゴリズム
 def pleaseConformOnepass(caps):
     caps = caps + [caps[0]]
     for i in range(1, len(caps)):
